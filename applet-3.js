@@ -9,19 +9,19 @@ class DataLogger {
         this.logButton.addEventListener('click', () => this.logData());
         this.clearButton.addEventListener('click', () => this.clearLogs());
     }
-     // Logs the current timestamp and updates the display
-     logData() {
+    // Logs the current timestamp and updates the display
+    logData() {
         const timestamp = new Date().toLocaleString();
         this.loggedData.push(timestamp);
         this.updateCardContainer();
     }
-     // Clears all logged data and updates the display
-     clearLogs() {
+    // Clears all logged data and updates the display
+    clearLogs() {
         this.loggedData = [];
         this.updateCardContainer();
     }
-      // Updates the card container with logged data
-      updateCardContainer() {
+    // Updates the card container with logged data
+    updateCardContainer() {
         this.cardContainer.innerHTML = '';
 
         this.loggedData.forEach(data => {
@@ -39,10 +39,18 @@ class DataLogger {
 
         this.displayLogCount();
     }
-      // Returns the count of logged data entries
-      countLogs() {
+    // Returns the count of logged data entries
+    countLogs() {
         return this.loggedData.length;
     }
-
+    // Displays the count of logs in the designated element
+    displayLogCount() {
+        const logCount = this.countLogs();
+        this.logCountElement.innerHTML = `<p>Total Logs: ${logCount}</p>`;
+    }
 
 }
+// Initialize the DataLogger when the DOM content is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new DataLogger('logButton', 'cardContainer', 'clearButton', 'logCount');
+});
